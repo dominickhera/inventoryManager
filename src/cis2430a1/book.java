@@ -57,13 +57,13 @@ public class book extends Product
 //		return stringBYear;
 //	}
 //
-//	public String sendAuthor()
-//	{
-//		return author;
-//	}
-//
-//	public String sendPublisher()
-//	{
-//		return publisher;
-//	}
+	public String sendAuthor()
+	{
+		return author;
+	}
+
+	public String sendPublisher()
+	{
+		return publisher;
+	}
 }

@@ -23,4 +23,24 @@ public class Product
             this.price = price;
             this.year = year;
         }
+        
+        public int sendProdID()
+        {
+            return productID;
+        }
+        
+        public String sendName()
+        {
+            return name;
+        }
+        
+        public String sendPrice()
+        {
+            return price;
+        }
+        
+        public int sendYear()
+        {
+            return year;
+        }
 }

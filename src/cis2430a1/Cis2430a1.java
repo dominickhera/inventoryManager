@@ -25,8 +25,9 @@ public class Cis2430a1
 		Scanner scannerString = new Scanner(System.in);
 
                 //declares arraylists
-		ArrayList<book> books = new ArrayList<book>();
-		ArrayList<electronics> electronic = new ArrayList<electronics>();
+//		ArrayList<book> books = new ArrayList<book>();
+//		ArrayList<electronics> electronic = new ArrayList<electronics>();
+                ArrayList<Product> products = new ArrayList<Product>();
 
 		String userInput = "";
 		int itemCount = 0;
@@ -35,7 +36,7 @@ public class Cis2430a1
 
 		while (!"quit".equals(userInput))
 		{
-			System.out.println("eStore Options:\n\nadd\nsearch\nquit\n");
+			System.out.println("eStore Options:\n\nadd\nsearch\nsave\nload\nquit\n");
 			userInput = scannerObj.nextLine();
 			switch(userInput.toLowerCase())
 			{
@@ -51,24 +52,24 @@ public class Cis2430a1
 							int bProdID = scannerString.nextInt();
 							scannerString.nextLine();
 
-							for (int i = 0; i < electronicCount; i++)
-							{
-								while(bProdID == electronic.get(i).sendEProdID())
-								{
-									System.out.print("That product ID already exists, please enter a new product ID: ");
-									bProdID = scannerString.nextInt();
-									scannerString.nextLine();
-								}
-							}
-							for (int i = 0; i < bookCount; i++)
-							{
-								while(bProdID == books.get(i).sendBProdID())
-								{
-									System.out.print("That product ID already exists, please enter a new product ID: ");
-									bProdID = scannerString.nextInt();
-									scannerString.nextLine();
-								}
-							}
+//							for (int i = 0; i < electronicCount; i++)
+//							{
+//								while(bProdID == electronic.get(i).sendEProdID())
+//								{
+//									System.out.print("That product ID already exists, please enter a new product ID: ");
+//									bProdID = scannerString.nextInt();
+//									scannerString.nextLine();
+//								}
+//							}
+//							for (int i = 0; i < bookCount; i++)
+//							{
+//								while(bProdID == books.get(i).sendBProdID())
+//								{
+//									System.out.print("That product ID already exists, please enter a new product ID: ");
+//									bProdID = scannerString.nextInt();
+//									scannerString.nextLine();
+//								}
+//							}
 							String bProdIDLength = Integer.toString(bProdID);
 							while(bProdIDLength.length() != 6)
 							{
@@ -98,7 +99,7 @@ public class Cis2430a1
 							String bPublisher = scannerString.nextLine();
                                                         
                                                         //adds the data into the arrayList
-							books.add(new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
+							products.add(new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
 							itemCount++;
 							bookCount++;
 
@@ -116,24 +117,24 @@ public class Cis2430a1
 							System.out.print("Product ID: ");
 							int eProdID = scannerString.nextInt();
 							scannerString.nextLine();
-							for (int i = 0; i < electronicCount; i++)
-							{
-								while(eProdID == electronic.get(i).sendEProdID())
-								{
-									System.out.print("That product ID already exists, please enter a new product ID: ");
-									eProdID = scannerString.nextInt();
-									scannerString.nextLine();
-								}
-							}
-							for (int i = 0; i < bookCount; i++)
-							{
-								while(eProdID == books.get(i).sendBProdID())
-								{
-									System.out.print("That product ID already exists, please enter a new product ID: ");
-									eProdID = scannerString.nextInt();
-									scannerString.nextLine();
-								}
-							}
+//							for (int i = 0; i < electronicCount; i++)
+//							{
+//								while(eProdID == electronic.get(i).sendEProdID())
+//								{
+//									System.out.print("That product ID already exists, please enter a new product ID: ");
+//									eProdID = scannerString.nextInt();
+//									scannerString.nextLine();
+//								}
+//							}
+//							for (int i = 0; i < bookCount; i++)
+//							{
+//								while(eProdID == books.get(i).sendBProdID())
+//								{
+//									System.out.print("That product ID already exists, please enter a new product ID: ");
+//									eProdID = scannerString.nextInt();
+//									scannerString.nextLine();
+//								}
+//							}
 
 							String eProdIDLength = Integer.toString(eProdID);
 							while(eProdIDLength.length() != 6)
@@ -159,7 +160,7 @@ public class Cis2430a1
 							}
 							System.out.print("Company: ");
 							String eCompany = scannerString.nextLine();
-							electronic.add(new electronics(eProdID, eTitle, eCost, eYear, eCompany));
+							products.add(new electronics(eProdID, eTitle, eCost, eYear, eCompany));
 							itemCount++;
 							electronicCount++;
 						}
@@ -190,28 +191,28 @@ public class Cis2430a1
 					String[] keywordSearch = keywords.split("[ ]+");
 					System.out.print("\n");
 
-					for (int i = 0; i < bookCount; i++)
-					{
-
-						for(int j = 0; j < keywordSearch.length; j++)
-						{
-							if(books.get(i).sendBName().contains(keywordSearch[j]) || books.get(i).sendBPrice().contains(keywordSearch[j]) || books.get(i).sendAuthor().contains(keywordSearch[j]) || books.get(i).sendPublisher().contains(keywordSearch[j]) || books.get(i).sendBYear().contains(keywordSearch[j]) || books.get(i).sendStringBProdID().contains(keywordSearch[j]))
-							{
-								System.out.println("found " + keywords);
-								System.out.print("Product ID: " + books.get(i).sendBProdID() + "\nTitle: " + books.get(i).sendBName() + "\nCost: $" + books.get(i).sendBPrice() + "\nYear: " + books.get(i).sendBYear() + "\nAuthor: " + books.get(i).sendAuthor() + "\nPublisher: " + books.get(i).sendPublisher() + "\n\n");
-							}
-						}
-					}
-					for(int i = 0; i < electronicCount; i++)
-					{
-						for(int j = 0; j < keywordSearch.length; j++)
-						{
-							if(electronic.get(i).sendEName().contains(keywordSearch[j]) || electronic.get(i).sendEPrice().contains(keywordSearch[j]) || electronic.get(i).sendStringEProdID().contains(keywordSearch[j]) || electronic.get(i).sendMaker().contains(keywordSearch[j]))
-							{
-								System.out.print("Product ID: " + electronic.get(i).sendEProdID() + "\nTitle: " + electronic.get(i).sendEName() + "\nCost: $" + electronic.get(i).sendEPrice() + "\nYear: " + electronic.get(i).sendEYear() + "\nMaker: " + electronic.get(i).sendMaker() + "\n");
-							}
-						}
-					}
+//					for (int i = 0; i < bookCount; i++)
+//					{
+//
+//						for(int j = 0; j < keywordSearch.length; j++)
+//						{
+//							if(books.get(i).sendBName().contains(keywordSearch[j]) || books.get(i).sendBPrice().contains(keywordSearch[j]) || books.get(i).sendAuthor().contains(keywordSearch[j]) || books.get(i).sendPublisher().contains(keywordSearch[j]) || books.get(i).sendBYear().contains(keywordSearch[j]) || books.get(i).sendStringBProdID().contains(keywordSearch[j]))
+//							{
+//								System.out.println("found " + keywords);
+//								System.out.print("Product ID: " + books.get(i).sendBProdID() + "\nTitle: " + books.get(i).sendBName() + "\nCost: $" + books.get(i).sendBPrice() + "\nYear: " + books.get(i).sendBYear() + "\nAuthor: " + books.get(i).sendAuthor() + "\nPublisher: " + books.get(i).sendPublisher() + "\n\n");
+//							}
+//						}
+//					}
+//					for(int i = 0; i < electronicCount; i++)
+//					{
+//						for(int j = 0; j < keywordSearch.length; j++)
+//						{
+//							if(electronic.get(i).sendEName().contains(keywordSearch[j]) || electronic.get(i).sendEPrice().contains(keywordSearch[j]) || electronic.get(i).sendStringEProdID().contains(keywordSearch[j]) || electronic.get(i).sendMaker().contains(keywordSearch[j]))
+//							{
+//								System.out.print("Product ID: " + electronic.get(i).sendEProdID() + "\nTitle: " + electronic.get(i).sendEName() + "\nCost: $" + electronic.get(i).sendEPrice() + "\nYear: " + electronic.get(i).sendEYear() + "\nMaker: " + electronic.get(i).sendMaker() + "\n");
+//							}
+//						}
+//					}
 
 
 					System.out.print("\n");
@@ -220,6 +221,11 @@ public class Cis2430a1
                                         //nicely says farewell as you quit.
 					System.out.println("goodbye\n");
 					System.exit(0);
+                                case "print":
+                                        System.out.println("prints shit");
+                                        System.out.println(products.get(0).sendProdID());
+                                        System.out.println(products.get(0).sendAuthor());
+                                        break;
 				default:
                                         //the prompt you'll recieve if you dont enter one of the three stated menu options
 					System.out.println("please enter one of the previously stated options\n");
