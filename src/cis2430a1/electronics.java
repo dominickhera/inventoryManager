@@ -29,5 +29,15 @@ public class electronics extends Product
             
             return data;
         }
+        
+        @Override 
+        
+        public String sendSearchData()
+        {
+            String searchData;
+            searchData = ("product ID: " + productID + "\nname: " + name + "\nprice: $" + price + "\nyear: " + year + "\nmaker: " + maker + "\n");
+            
+            return searchData;
+        }
 
 }

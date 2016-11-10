@@ -51,4 +51,12 @@ public class Product
             
             return data;
         }
+        
+        public String sendSearchData()
+        {
+            String searchData;
+            searchData = "hullo";
+            
+            return searchData;
+        }
 }

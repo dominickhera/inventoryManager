@@ -8,6 +8,7 @@ package cis2430a1;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -22,17 +23,29 @@ public class Cis2430a1
      */
     public static void main(String[] args) 
     {
-
         Scanner scannerObj = new Scanner(System.in);
         Scanner scannerString = new Scanner(System.in);
 
+        String fileName = "";
+        
+        if (args.length == 0)
+        {
+            System.out.println("not enough arguements, please enter a filename : ");
+            
+            fileName = scannerString.nextLine();
+        }
+        else
+        {
+            fileName = args[0];
+            System.out.println("found file, opening " + fileName);
+        }
+        
         //declares arraylists
         ArrayList<Product> products = new ArrayList<Product>();
+        HashMap <String, Integer> map = new HashMap<>();
 
         String userInput = "";
         int itemCount = 0;
-        int bookCount = 0;
-        int electronicCount = 0;
 
         while (!"quit".equals(userInput))
         {
@@ -91,8 +104,10 @@ public class Cis2430a1
 
                             //adds the data into the arrayList
                             products.add(new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
+//                            map.put(bTitle, new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
+//                            String value = (String)map.get("harry potter");
+                            System.out.println("title" + map.get("harry potter"));
                             itemCount++;
-                            bookCount++;
 
                         }
                         catch(InputMismatchException exception)
@@ -144,7 +159,6 @@ public class Cis2430a1
                             String eCompany = scannerString.nextLine();
                             products.add(new electronics(eProdID, eTitle, eCost, eYear, eCompany));
                             itemCount++;
-                            electronicCount++;
                         }
                         catch(InputMismatchException exception)
                         {         
@@ -166,44 +180,108 @@ public class Cis2430a1
                         break;
                     }
 
-                    //turns whatever the user enters into an array of strings that the program will compare against the currently entered data and print out the information relating to it
-                    System.out.print("enter a keyword for the product you're searching for: ");
-                    String keywords = scannerString.nextLine(); 
+                    int searchChoice = 0;
 
-                    String[] keywordSearch = keywords.split("[ ]+");
-                    System.out.print("\n");
-
-                    //					for (int i = 0; i < bookCount; i++)
-                    //					{
-                    //
-                    //						for(int j = 0; j < keywordSearch.length; j++)
-                    //						{
-                    //							if(books.get(i).sendBName().contains(keywordSearch[j]) || books.get(i).sendBPrice().contains(keywordSearch[j]) || books.get(i).sendAuthor().contains(keywordSearch[j]) || books.get(i).sendPublisher().contains(keywordSearch[j]) || books.get(i).sendBYear().contains(keywordSearch[j]) || books.get(i).sendStringBProdID().contains(keywordSearch[j]))
-                    //							{
-                    //								System.out.println("found " + keywords);
-                    //								System.out.print("Product ID: " + books.get(i).sendBProdID() + "\nTitle: " + books.get(i).sendBName() + "\nCost: $" + books.get(i).sendBPrice() + "\nYear: " + books.get(i).sendBYear() + "\nAuthor: " + books.get(i).sendAuthor() + "\nPublisher: " + books.get(i).sendPublisher() + "\n\n");
-                    //							}
-                    //						}
-                    //					}
-                    //					for(int i = 0; i < electronicCount; i++)
-                    //					{
-                    //						for(int j = 0; j < keywordSearch.length; j++)
-                    //						{
-                    //							if(electronic.get(i).sendEName().contains(keywordSearch[j]) || electronic.get(i).sendEPrice().contains(keywordSearch[j]) || electronic.get(i).sendStringEProdID().contains(keywordSearch[j]) || electronic.get(i).sendMaker().contains(keywordSearch[j]))
-                    //							{
-                    //								System.out.print("Product ID: " + electronic.get(i).sendEProdID() + "\nTitle: " + electronic.get(i).sendEName() + "\nCost: $" + electronic.get(i).sendEPrice() + "\nYear: " + electronic.get(i).sendEYear() + "\nMaker: " + electronic.get(i).sendMaker() + "\n");
-                    //							}
-                    //						}
-                    //					}
+                    while(searchChoice != 5)
+                    {
 
 
-                    System.out.print("\n");
+                        System.out.println("what kind of search do you want to do?\n\n");
+                        System.out.println("(1) ProductID Match\n(2) Keyword Match\n(3) Time Period Match\n(4) Combined Search\n(5) Return to main menu\n");
+                        searchChoice = scannerString.nextInt();
+                        scannerString.nextLine();
+
+                        switch(searchChoice)
+                        {
+                            case 1:
+                                System.out.print("enter the product ID of the product you're searching for: ");
+                                int idProdSearch = scannerString.nextInt();
+                                scannerString.nextLine();
+                                for (int i = 0; i < itemCount; i++)
+                                {
+                                if(idProdSearch == products.get(i).sendProdID())
+                                {
+                                    System.out.print("Found this item matching you're search:\n\n");
+                                    System.out.println(products.get(i).sendSearchData());
+                                    
+                                }
+                                
+                                }
+                                break;
+                            case 2:
+                                //turns whatever the user enters into an array of strings that the program will compare against the currently entered data and print out the information relating to it
+                                System.out.print("enter a keyword for the product you're searching for: ");
+                                String keywords = scannerString.nextLine(); 
+
+                                String[] keywordSearch = keywords.split("[ ]+");
+                                System.out.print("\n");
+
+                                //                    					for (int i = 0; i < bookCount; i++)
+                                //                    					{
+                                //                    
+                                //                    						for(int j = 0; j < keywordSearch.length; j++)
+                                //                    						{
+                                //                    							if(books.get(i).sendBName().contains(keywordSearch[j]) || books.get(i).sendBPrice().contains(keywordSearch[j]) || books.get(i).sendAuthor().contains(keywordSearch[j]) || books.get(i).sendPublisher().contains(keywordSearch[j]) || books.get(i).sendBYear().contains(keywordSearch[j]) || books.get(i).sendStringBProdID().contains(keywordSearch[j]))
+                                //                    							{
+                                //                    								System.out.println("found " + keywords);
+                                //                    								System.out.print("Product ID: " + books.get(i).sendBProdID() + "\nTitle: " + books.get(i).sendBName() + "\nCost: $" + books.get(i).sendBPrice() + "\nYear: " + books.get(i).sendBYear() + "\nAuthor: " + books.get(i).sendAuthor() + "\nPublisher: " + books.get(i).sendPublisher() + "\n\n");
+                                //                    							}
+                                //                    						}
+                                //                    					}
+                                //                    					for(int i = 0; i < electronicCount; i++)
+                                //                    					{
+                                //                    						for(int j = 0; j < keywordSearch.length; j++)
+                                //                    						{
+                                //                    							if(electronic.get(i).sendEName().contains(keywordSearch[j]) || electronic.get(i).sendEPrice().contains(keywordSearch[j]) || electronic.get(i).sendStringEProdID().contains(keywordSearch[j]) || electronic.get(i).sendMaker().contains(keywordSearch[j]))
+                                //                    							{
+                                //                    								System.out.print("Product ID: " + electronic.get(i).sendEProdID() + "\nTitle: " + electronic.get(i).sendEName() + "\nCost: $" + electronic.get(i).sendEPrice() + "\nYear: " + electronic.get(i).sendEYear() + "\nMaker: " + electronic.get(i).sendMaker() + "\n");
+                                //                    							}
+                                //                    						}
+                                //                    					}
+
+                                break;
+                            case 3:
+                                System.out.println("still no idea how to do this but running out of time so...");
+//                                for (String key : map.keySet())
+//                                {
+//                                    System.out.println("this is the key " + key);
+//                                }
+                                break;
+                            case 4:
+                                System.out.printf("enter keywords in title to search: ");
+                                String searchTerms = scannerString.nextLine();
+//                                Object key = null;
+                                
+//                                for (String key : map.keySet())
+//                                {
+//                                    System.out.println("this is the key " + key);
+//                                }
+                                
+//                                for(Map.Entry entry: map.entrySet())
+//                                {
+//                                 if(searchTerms.equals(entry.getValue()))
+//                                 {
+//                                     key = entry.getKey();
+//                                     break;
+//                                 }
+//                                }
+//                                System.out.printf("key is" + key);
+                                break;
+                            case 5:
+                                searchChoice = 5;
+                                System.out.println("Returning to main menu...");
+                                break;
+                            default:
+                                System.out.println("Please choose an option between 1-5");
+                                break;
+                        }
+                        System.out.print("\n");
+                    }
                     break;
                 case "save":
                     try
                     {
-                        PrintWriter fileDump = new PrintWriter("/Users/Dominick/NetBeansProjects/inventoryManager/src/cis2430a1/data.txt");
-//                        System.out.println("item count is " + itemCount);
+                        PrintWriter fileDump = new PrintWriter(fileName);
                         if(itemCount == 0)
                         {
                             System.out.println("No items entered. Can't Save anything.");
@@ -216,7 +294,7 @@ public class Cis2430a1
                         fileDump.close();
                         System.out.println("File Saved Successfully");
                     }
-                    catch(Exception ex)
+                    catch(Exception ex) 
                     {
                         System.out.println("could not write to data file");
                     }
@@ -227,42 +305,36 @@ public class Cis2430a1
                         int loadNum = 0;
                         int testCount = 0;
                         String [] testString = new String[1000];
-                        File f = new File("/Users/Dominick/NetBeansProjects/inventoryManager/src/cis2430a1/data.txt");
+                        File f = new File(fileName);
                         Scanner scanner = new Scanner(f);
-                        
-//                        if (loadNum != 0)
-//                        {
-//                            System.out.println("A file has already been loaded in.\nreturning to main menu....");
-//                            break;
-//                        }
                         while (scanner.hasNextLine())
                         {
                             String test =  scanner.nextLine();
                             String newTest;
                             if (test.isEmpty())
                             {
-                                    if("book".equals(testString[0]))
-                                    {
+                                if("book".equals(testString[0]))
+                                {
 
-                                        int parsedYear = Integer.parseInt(testString[4]);
-                                        int parsedProductID = Integer.parseInt(testString[1]);
-                                        products.add(new book(parsedProductID, testString[2], testString[3], parsedYear, testString[5], testString[6]));
-                                        parsedYear = 0;
-                                        parsedProductID = 0;
-                                        testCount = 0;
-                                        itemCount++;
-                                    }
-                                    else if("electronic".equals(testString[0]))
-                                    {
-                                        
-                                        int parsedYear = Integer.parseInt(testString[4]);
-                                        int parsedProductID = Integer.parseInt(testString[1]);
-                                        products.add(new electronics(parsedProductID, testString[2], testString[3], parsedYear, testString[5]));
-                                        parsedYear = 0;
-                                        parsedProductID = 0;
-                                        testCount = 0;
-                                        itemCount++;
-                                    }
+                                    int parsedYear = Integer.parseInt(testString[4]);
+                                    int parsedProductID = Integer.parseInt(testString[1]);
+                                    products.add(new book(parsedProductID, testString[2], testString[3], parsedYear, testString[5], testString[6]));
+                                    parsedYear = 0;
+                                    parsedProductID = 0;
+                                    testCount = 0;
+                                    itemCount++;
+                                }
+                                else if("electronic".equals(testString[0]))
+                                {
+
+                                    int parsedYear = Integer.parseInt(testString[4]);
+                                    int parsedProductID = Integer.parseInt(testString[1]);
+                                    products.add(new electronics(parsedProductID, testString[2], testString[3], parsedYear, testString[5]));
+                                    parsedYear = 0;
+                                    parsedProductID = 0;
+                                    testCount = 0;
+                                    itemCount++;
+                                }
                             }
                             else
                             {

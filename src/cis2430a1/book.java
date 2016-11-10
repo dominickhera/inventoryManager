@@ -41,4 +41,14 @@ public class book extends Product
             
             return data;
         }
+        
+         @Override 
+        
+        public String sendSearchData()
+        {
+            String searchData;
+            searchData = ("product ID: " + productID + "\nName: " + name + "\nPrice : $" + price + "\nYear: " + year + "\nAuthor(s): " + author + "\nPublisher: " + publisher + "\n");
+            
+            return searchData;
+        }
 }
