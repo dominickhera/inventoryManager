@@ -1,0 +1,8 @@
+type = (book)
+productID = (123456)
+name = (harry potter)
+price = (12)
+year = (1999)
+authors = (jk rowling)
+publisher = (penguin)
+

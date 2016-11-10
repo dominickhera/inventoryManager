@@ -11,10 +11,10 @@ package cis2430a1;
  */
 public class Product 
 {
-    private int productID;
-    private String name;
-    private String price;
-    private int year;
+    public int productID;
+    public String name;
+    public String price;
+    public int year;
  
         public Product (int productID, String name, String price, int year)
         {
@@ -42,5 +42,13 @@ public class Product
         public int sendYear()
         {
             return year;
+        }
+        
+        public String sendData()
+        {
+            String data;
+            data = "hiya";
+            
+            return data;
         }
 }

@@ -17,46 +17,11 @@ public class book extends Product
 
 	public book (int productID, String name, String price, int year, String author, String publisher)
 	{
-//		this.productID = productID;
-//		this.name = name;
-//		this.price = price;
-//		this.year = year;
                 super(productID,name,price,year);
 		this.author = author;
 		this.publisher = publisher;
         }
                 
-//	public int sendBProdID()
-//	{
-//		return productID;
-//	}
-//
-//	public String sendStringBProdID()
-//	{
-//		String stringBYear;
-//
-//		stringBYear = Integer.toString(year);
-//		return stringBYear;
-//	}
-//
-//	public String sendBName()
-//	{
-//		return name;
-//	}
-//
-//	public String sendBPrice()
-//	{
-//		return price;
-//	}
-//
-//	public String sendBYear()
-//	{
-//		String stringBYear;
-//
-//		stringBYear = Integer.toString(year);
-//		return stringBYear;
-//	}
-//
 	public String sendAuthor()
 	{
 		return author;
@@ -66,4 +31,14 @@ public class book extends Product
 	{
 		return publisher;
 	}
+        
+        @Override
+        
+        public String sendData()
+        {
+            String data;
+            data = ("type = (book)\nproductID = (" + productID + ")\nname = (" + name + ")\nprice = (" + price + ")\nyear = (" + year + ")\nauthors = (" + author + ")\npublisher = (" + publisher + ")\n\n" );
+            
+            return data;
+        }
 }
