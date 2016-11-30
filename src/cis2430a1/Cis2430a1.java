@@ -21,6 +21,8 @@ import java.awt.event.*;
 public class Cis2430a1 extends JFrame
 {
    JLabel welcome;
+   JLabel addTitle;
+   JLabel searchTitle;
    private JPanel welcomePanel;
    private JPanel addPanel;
    private JPanel searchPanel;
@@ -35,11 +37,18 @@ public class Cis2430a1 extends JFrame
         JPanel welcomePanel = new JPanel();
         welcomePanel.setLayout(new GridLayout(1,3));
         JPanel addPanel = new JPanel();
-        addPanel.setLayout(new GridLayout(10,10));
+        addPanel.setLayout(new GridLayout(1,3));
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new GridLayout(1,3));
         String[] commandStrings = { "command", "add", "search", "quit" };
-        final JComboBox commandList = new JComboBox(commandStrings);
+        JComboBox commandList = new JComboBox(commandStrings);
+        
+        String[] productStrings = {"book", "electronic"};
+        JComboBox productType = new JComboBox(productStrings);
+        addPanel.setVisible(false);
+        addPanel.setEnabled(false);
+        searchPanel.setVisible(false);
+        searchPanel.setEnabled(false);
         commandList.addActionListener(new ActionListener() 
         {
             @Override
@@ -50,12 +59,25 @@ public class Cis2430a1 extends JFrame
                     System.out.println("add");
                     welcomePanel.setEnabled(false);
                     welcomePanel.setVisible(false);
+                    searchPanel.setEnabled(false);
+                    searchPanel.setVisible(false);
+                    remove(welcomePanel);
+                    remove(searchPanel);
+                    add(addPanel);
+                    addPanel.setVisible(true);
+                    addPanel.setEnabled(true);
+                    
                 }
                 else if(commandList.getSelectedItem().toString().equals("search"))
                 {
                     System.out.println("search");
-                    welcomePanel.setVisible(false);
                     welcomePanel.setEnabled(false);
+                    welcomePanel.setVisible(false);
+                    add(searchPanel);
+                    remove(welcomePanel);
+                    remove(addPanel);
+                    searchPanel.setVisible(true);
+                    searchPanel.setEnabled(true);
                 }
                 else if(commandList.getSelectedItem().toString().equals("quit"))
                 {
@@ -63,15 +85,42 @@ public class Cis2430a1 extends JFrame
                 }
                 else if(commandList.getSelectedItem().toString().equals("command"))
                 {
+                    remove(addPanel);
+                    remove(searchPanel);
+                    add(welcomePanel);
                     welcomePanel.setVisible(true);
                     welcomePanel.setEnabled(true);
                 }
             }
         });
-                
+            
+        
+        productType.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(productType.getSelectedItem().toString().equals("book"))
+                {
+                    System.out.println("book");
+                }
+                else if(productType.getSelectedItem().toString().equals("electronic"))
+                {
+                    System.out.println("electronic");
+                }
+            }
+        });
+            
         welcome = new JLabel("<html><br><br>Welcome to eStore<br> Choose a command from the Commands menu above for <br> adding a product, searching products, or quitting the program.<br><br><br></html>");
         welcomePanel.add(welcome);
         
+        addTitle = new JLabel("Adding a product");
+        addPanel.add(addTitle);
+        
+        searchTitle = new JLabel("Searching products");
+        searchPanel.add(searchTitle);
+        
+        addPanel.add(productType);
         add(commandList);
         add(welcomePanel);
         add(addPanel);
