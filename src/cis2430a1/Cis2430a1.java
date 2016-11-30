@@ -30,6 +30,27 @@ public class Cis2430a1 extends JFrame
    JLabel aYearLabel;
    JLabel aAuthorLabel;
    JLabel aPublisherLabel;
+   JLabel aMakerLabel;
+   JLabel sProdIDLabel;
+   JLabel sKeywordLabel;
+   JLabel sStartYearLabel;
+   JLabel sEndYearLabel;
+   JTextField aProdIDField;
+   JTextField aNameField;
+   JTextField aPriceField;
+   JTextField aYearField;
+   JTextField aAuthorField;
+   JTextField aPublisherField;
+   JTextField aMakerField;
+   JTextField sProdIDField;
+   JTextField sKeywordField;
+   JTextField sStartYearField;
+   JTextField sEndYearField;
+   JTextArea addTextMessage;
+   JScrollPane addScroll;
+   JTextArea searchTextMessage;
+   JScrollPane searchScroll;
+   
    private JPanel welcomePanel;
    private JPanel addPanel;
    private JPanel searchPanel;
@@ -38,24 +59,26 @@ public class Cis2430a1 extends JFrame
     {
         super();
         setTitle("eStore");
-        setSize(750,500);
+        setSize(750,1000);
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(10,10));
-        JPanel welcomePanel = new JPanel();
+        setLayout(new GridLayout(5,10));
+        welcomePanel = new JPanel();
         welcomePanel.setLayout(new GridLayout(1,3));
-        JPanel addPanel = new JPanel();
+        addPanel = new JPanel();
         addPanel.setLayout(new GridBagLayout());
 //        addPanel.setSize(500,500);
         GridBagConstraints c = new GridBagConstraints();
-        JPanel searchPanel = new JPanel();
-        searchPanel.setLayout(new GridLayout(1,3));
+        searchPanel = new JPanel();
+        searchPanel.setLayout(new GridBagLayout());
         String[] commandStrings = { "command", "add", "search", "quit" };
         JComboBox commandList = new JComboBox(commandStrings);
-        
         String[] productStrings = {"book", "electronic"};
         JComboBox productType = new JComboBox(productStrings);
         addPanel.setVisible(false);
         addPanel.setEnabled(false);
+//        aMakerLabel.setVisible(false);
+//        aMakerField.setVisible(false);
+//        aMakerField.setEnabled(false);
         searchPanel.setVisible(false);
         searchPanel.setEnabled(false);
         commandList.addActionListener(new ActionListener() 
@@ -112,10 +135,29 @@ public class Cis2430a1 extends JFrame
                 if(productType.getSelectedItem().toString().equals("book"))
                 {
                     System.out.println("book");
+                    aPublisherLabel.setVisible(true);
+                    aAuthorLabel.setVisible(true);
+                     aPublisherField.setVisible(true);
+                    aAuthorField.setVisible(true);
+                    aPublisherField.setEnabled(true);
+                    aAuthorField.setEnabled(true);
+                    aMakerField.setVisible(false);
+                    aMakerField.setEnabled(false);
+                    aMakerLabel.setVisible(false);
+                    
                 }
                 else if(productType.getSelectedItem().toString().equals("electronic"))
                 {
                     System.out.println("electronic");
+                    aPublisherLabel.setVisible(false);
+                    aAuthorLabel.setVisible(false);
+                    aPublisherField.setVisible(false);
+                    aAuthorField.setVisible(false);
+                    aPublisherField.setEnabled(false);
+                    aAuthorField.setEnabled(false);
+                    aMakerField.setVisible(true);
+                    aMakerField.setEnabled(true);
+                    aMakerLabel.setVisible(true);
                 }
             }
         });
@@ -127,97 +169,250 @@ public class Cis2430a1 extends JFrame
         addTitle = new JLabel("Adding a product");
         c.gridx = 0;
         c.gridy = 0;
+//        c.weightx = 0.5;
+        c.weighty = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
         addPanel.add(addTitle, c);
-        addPanel.revalidate();
-        addPanel.repaint();
         
         aTypeLabel = new JLabel("Type:");
         c.gridx = 0;
         c.gridy = 2;
-//        addPanel.revalidate();
-//        addPanel.repaint();
+        c.weighty = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
-        addPanel.revalidate();
-        addPanel.repaint();
         addPanel.add(aTypeLabel, c);
         
         
-//        addPanel.revalidate();
-//        addPanel.repaint();
         c.gridx = 1;
         c.gridy = 2;
-//        c.weightx = 0.5;
-        c.weighty = 1;
-//        addPanel.revalidate();
-//        addPanel.repaint();
+        c.weighty = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
-        addPanel.revalidate();
-        addPanel.repaint();
-//        c.ipady = 0;
         addPanel.add(productType, c);
         
         aProdIDLabel = new JLabel("Product ID:");
-//        addPanel.revalidate();
-//        addPanel.repaint();
         c.gridx = 0;
         c.gridy = 3;
-//        addPanel.revalidate();
-//        addPanel.repaint();
-//        c.weightx = 0.5;
-
+        c.weighty = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
-        addPanel.revalidate();
-        addPanel.repaint();
         addPanel.add(aProdIDLabel, c);
         
+        c.gridx = 1;
+        c.gridy = 3;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aProdIDField = new JTextField(15);
+        addPanel.add(aProdIDField, c);
+        
+        JButton aResetButton = new JButton("Reset");
+        c.gridx = 2;
+        c.gridy = 3;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aResetButton,c);
+        
+        JButton aAddButton = new JButton("Add");
+        c.gridx = 2;
+        c.gridy = 6;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aAddButton,c);
+        
         aNameLabel = new JLabel("Name:");
-//        addPanel.revalidate();
-//        addPanel.repaint();
         c.gridx = 0;
         c.gridy = 4;
-//        addPanel.revalidate();
-//        addPanel.repaint();
-//        c.weightx = 0.5;
+        c.weighty = 0.5;
         c.fill = GridBagConstraints.HORIZONTAL;
-        addPanel.revalidate();
-        addPanel.repaint();
         addPanel.add(aNameLabel, c);
         
-//        aPriceLabel = new JLabel("Price:");
-//        c.gridx = 0;
-//        c.gridy = 4;
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        addPanel.add(aPriceLabel);
-//        
-//        aYearLabel = new JLabel("Year:");
-//        c.gridx = 0;
-//        c.gridy = 5;
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        addPanel.add(aYearLabel,c);
-//        
-//        aAuthorLabel = new JLabel("Authors");
-//        c.gridx = 0;
-//        c.gridy = 6;
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        addPanel.add(aAuthorLabel, c);
-//        
-//        aPublisherLabel = new JLabel("Publisher");
-//        c.gridx = 0;
-//        c.gridy = 7;
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        addPanel.add(aPublisherLabel,c);
+        c.gridx = 1;
+        c.gridy = 4;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aNameField = new JTextField(20);
+        addPanel.add(aNameField, c);
+        
+        aPriceLabel = new JLabel("Price:");
+        c.gridx = 0;
+        c.gridy = 5;
+        c.weighty = 0.5;
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aPriceLabel, c);
+        
+        c.gridx = 1;
+        c.gridy = 5;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aPriceField = new JTextField(10);
+        addPanel.add(aPriceField, c);
+        
+        aYearLabel = new JLabel("Year:");
+        c.gridx = 0;
+        c.gridy = 6;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aYearLabel,c);
+        
+        c.gridx = 1;
+        c.gridy = 6;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aYearField = new JTextField(10);
+        addPanel.add(aYearField, c);
+        
+        aAuthorLabel = new JLabel("Authors:");
+        c.gridx = 0;
+        c.gridy = 7;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aAuthorLabel, c);
+        
+        c.gridx = 1;
+        c.gridy = 7;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aAuthorField = new JTextField(20);
+        addPanel.add(aAuthorField, c);
+        
+        aPublisherLabel = new JLabel("Publisher");
+        c.gridx = 0;
+        c.gridy = 8;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aPublisherLabel,c);
+        
+        c.gridx = 1;
+        c.gridy = 8;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aPublisherField = new JTextField(20);
+        addPanel.add(aPublisherField, c);
+        
+        aMakerLabel = new JLabel("Maker:");
+        c.gridx = 0;
+        c.gridy = 8;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(aMakerLabel,c);
+        
+        c.gridx = 1;
+        c.gridy = 8;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        aMakerField = new JTextField(20);
+        addPanel.add(aMakerField, c);
+       
+        c.ipady = 40;      //make this component tall
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 9;
+        addTextMessage = new JTextArea(10,20);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addScroll = new JScrollPane(addTextMessage);
+        addScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        addPanel.add(addScroll,c);
+        addPanel.add(addTextMessage, c);
+        
         
         searchTitle = new JLabel("Searching products");
-        searchPanel.add(searchTitle);
+         c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(searchTitle,c);
         
-//        addPanel.add(productType);
+        
+        sProdIDLabel = new JLabel("Product ID:");
+        c.gridx = 0;
+        c.gridy = 2;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sProdIDLabel, c);
+        
+        c.gridx = 1;
+        c.gridy = 2;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        sProdIDField = new JTextField(15);
+        searchPanel.add(sProdIDField, c);
+        
+        JButton sResetButton = new JButton("Reset");
+        c.gridx = 2;
+        c.gridy = 2;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sResetButton,c);
+        
+        JButton sSearchButton = new JButton("Search");
+        c.gridx = 2;
+        c.gridy = 4;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sSearchButton,c);
+        
+        sKeywordLabel = new JLabel("Name/Keywords :");
+        c.gridx = 0;
+        c.gridy = 3;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sKeywordLabel, c);
+        
+        c.gridx = 1;
+        c.gridy = 3;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        sKeywordField = new JTextField(20);
+        searchPanel.add(sKeywordField, c);
+        
+        sStartYearLabel = new JLabel("Start Year:");
+        c.gridx = 0;
+        c.gridy = 4;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sStartYearLabel, c);
+        
+        c.gridx = 1;
+        c.gridy = 4;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        sStartYearField = new JTextField(10);
+        searchPanel.add(sStartYearField, c);
+        
+        sEndYearLabel = new JLabel("End Year:");
+        c.gridx = 0;
+        c.gridy = 5;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchPanel.add(sEndYearLabel,c);
+        
+        c.gridx = 1;
+        c.gridy = 5;
+        c.weighty = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        sEndYearField = new JTextField(10);
+        searchPanel.add(sEndYearField, c);
+        
+       
+        c.ipady = 40;
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 6;
+        searchTextMessage = new JTextArea(10,20);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        searchScroll = new JScrollPane(searchTextMessage);
+        searchScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        searchPanel.add(searchScroll,c);
+        searchPanel.add(searchTextMessage, c);
+        
+
         add(commandList);
         add(welcomePanel);
         add(addPanel);
         add(searchPanel);        
         
-        
+
     }
 
     public static void main(String[] args) 
