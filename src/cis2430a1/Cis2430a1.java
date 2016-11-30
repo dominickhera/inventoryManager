@@ -23,6 +23,13 @@ public class Cis2430a1 extends JFrame
    JLabel welcome;
    JLabel addTitle;
    JLabel searchTitle;
+   JLabel aTypeLabel;
+   JLabel aProdIDLabel;
+   JLabel aNameLabel;
+   JLabel aPriceLabel;
+   JLabel aYearLabel;
+   JLabel aAuthorLabel;
+   JLabel aPublisherLabel;
    private JPanel welcomePanel;
    private JPanel addPanel;
    private JPanel searchPanel;
@@ -37,7 +44,9 @@ public class Cis2430a1 extends JFrame
         JPanel welcomePanel = new JPanel();
         welcomePanel.setLayout(new GridLayout(1,3));
         JPanel addPanel = new JPanel();
-        addPanel.setLayout(new GridLayout(1,3));
+        addPanel.setLayout(new GridBagLayout());
+//        addPanel.setSize(500,500);
+        GridBagConstraints c = new GridBagConstraints();
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new GridLayout(1,3));
         String[] commandStrings = { "command", "add", "search", "quit" };
@@ -111,16 +120,98 @@ public class Cis2430a1 extends JFrame
             }
         });
             
+        
         welcome = new JLabel("<html><br><br>Welcome to eStore<br> Choose a command from the Commands menu above for <br> adding a product, searching products, or quitting the program.<br><br><br></html>");
         welcomePanel.add(welcome);
         
         addTitle = new JLabel("Adding a product");
-        addPanel.add(addTitle);
+        c.gridx = 0;
+        c.gridy = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.add(addTitle, c);
+        addPanel.revalidate();
+        addPanel.repaint();
+        
+        aTypeLabel = new JLabel("Type:");
+        c.gridx = 0;
+        c.gridy = 2;
+//        addPanel.revalidate();
+//        addPanel.repaint();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.revalidate();
+        addPanel.repaint();
+        addPanel.add(aTypeLabel, c);
+        
+        
+//        addPanel.revalidate();
+//        addPanel.repaint();
+        c.gridx = 1;
+        c.gridy = 2;
+//        c.weightx = 0.5;
+        c.weighty = 1;
+//        addPanel.revalidate();
+//        addPanel.repaint();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.revalidate();
+        addPanel.repaint();
+//        c.ipady = 0;
+        addPanel.add(productType, c);
+        
+        aProdIDLabel = new JLabel("Product ID:");
+//        addPanel.revalidate();
+//        addPanel.repaint();
+        c.gridx = 0;
+        c.gridy = 3;
+//        addPanel.revalidate();
+//        addPanel.repaint();
+//        c.weightx = 0.5;
+
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.revalidate();
+        addPanel.repaint();
+        addPanel.add(aProdIDLabel, c);
+        
+        aNameLabel = new JLabel("Name:");
+//        addPanel.revalidate();
+//        addPanel.repaint();
+        c.gridx = 0;
+        c.gridy = 4;
+//        addPanel.revalidate();
+//        addPanel.repaint();
+//        c.weightx = 0.5;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        addPanel.revalidate();
+        addPanel.repaint();
+        addPanel.add(aNameLabel, c);
+        
+//        aPriceLabel = new JLabel("Price:");
+//        c.gridx = 0;
+//        c.gridy = 4;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+//        addPanel.add(aPriceLabel);
+//        
+//        aYearLabel = new JLabel("Year:");
+//        c.gridx = 0;
+//        c.gridy = 5;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+//        addPanel.add(aYearLabel,c);
+//        
+//        aAuthorLabel = new JLabel("Authors");
+//        c.gridx = 0;
+//        c.gridy = 6;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+//        addPanel.add(aAuthorLabel, c);
+//        
+//        aPublisherLabel = new JLabel("Publisher");
+//        c.gridx = 0;
+//        c.gridy = 7;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+//        addPanel.add(aPublisherLabel,c);
         
         searchTitle = new JLabel("Searching products");
         searchPanel.add(searchTitle);
         
-        addPanel.add(productType);
+//        addPanel.add(productType);
         add(commandList);
         add(welcomePanel);
         add(addPanel);
