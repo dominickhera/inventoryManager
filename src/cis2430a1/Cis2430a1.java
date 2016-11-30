@@ -11,16 +11,75 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 /**
  *
  * @author dominickhera
  */
-public class Cis2430a1 
+public class Cis2430a1 extends JFrame
 {
+   JLabel welcome;
+   private JPanel welcomePanel;
+   private JPanel addPanel;
+   private JPanel searchPanel;
+    
+    public Cis2430a1()
+    {
+        super();
+        setTitle("eStore");
+        setSize(750,500);
+        setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(10,10));
+        JPanel welcomePanel = new JPanel();
+        welcomePanel.setLayout(new GridLayout(1,3));
+        JPanel addPanel = new JPanel();
+        addPanel.setLayout(new GridLayout(10,10));
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new GridLayout(1,3));
+        String[] commandStrings = { "command", "add", "search", "quit" };
+        final JComboBox commandList = new JComboBox(commandStrings);
+        commandList.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if(commandList.getSelectedItem().toString().equals("add"))
+                {
+                    System.out.println("add");
+                    welcomePanel.setEnabled(false);
+                    welcomePanel.setVisible(false);
+                }
+                else if(commandList.getSelectedItem().toString().equals("search"))
+                {
+                    System.out.println("search");
+                    welcomePanel.setVisible(false);
+                    welcomePanel.setEnabled(false);
+                }
+                else if(commandList.getSelectedItem().toString().equals("quit"))
+                {
+                    System.exit(0);
+                }
+                else if(commandList.getSelectedItem().toString().equals("command"))
+                {
+                    welcomePanel.setVisible(true);
+                    welcomePanel.setEnabled(true);
+                }
+            }
+        });
+                
+        welcome = new JLabel("<html><br><br>Welcome to eStore<br> Choose a command from the Commands menu above for <br> adding a product, searching products, or quitting the program.<br><br><br></html>");
+        welcomePanel.add(welcome);
+        
+        add(commandList);
+        add(welcomePanel);
+        add(addPanel);
+        add(searchPanel);        
+        
+        
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) 
     {
         Scanner scannerObj = new Scanner(System.in);
@@ -28,21 +87,23 @@ public class Cis2430a1
 
         String fileName = "";
         
-        if (args.length == 0)
-        {
-            System.out.println("not enough arguements, please enter a filename : ");
-            
-            fileName = scannerString.nextLine();
-        }
-        else
-        {
-            fileName = args[0];
-            System.out.println("found file, opening " + fileName);
-        }
+//        if (args.length == 0)
+//        {
+//            System.out.println("not enough arguements, please enter a filename : ");
+//            
+//            fileName = scannerString.nextLine();
+//        }
+//        else
+//        {
+//            fileName = args[0];
+//            System.out.println("found file, opening " + fileName);
+//        }
         
+        Cis2430a1 win = new Cis2430a1();
+        win.setVisible(true);
         //declares arraylists
         ArrayList<Product> products = new ArrayList<Product>();
-        HashMap <String, Integer> map = new HashMap<>();
+        HashMap <String, Product> map = new HashMap<>();
 
         String userInput = "";
         int itemCount = 0;
@@ -104,9 +165,9 @@ public class Cis2430a1
 
                             //adds the data into the arrayList
                             products.add(new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
-//                            map.put(bTitle, new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
+                            map.put(bTitle, new book(bProdID, bTitle, bCost, bYear, bAuthor, bPublisher));
 //                            String value = (String)map.get("harry potter");
-                            System.out.println("title" + map.get("harry potter"));
+//                            System.out.println("title" + map.get("harry potter"));
                             itemCount++;
 
                         }
