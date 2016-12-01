@@ -14,10 +14,17 @@ public class electronics extends Product
     
 	private String maker;
 
-	public electronics (int productID, String name, String price, int year, String maker)
+	public electronics (int productID, String name, String price, int year, String maker) throws idTooShortException, yearTooOldException, emptyFieldException
 	{
                 super(productID,name,price,year);
+                if(maker == null)
+                {
+                    throw new emptyFieldException("maker field is empty, please fill in all fields");
+                }
+                else
+                {
 		this.maker = maker;
+                }
 	}
         
         @Override

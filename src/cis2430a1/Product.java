@@ -16,12 +16,42 @@ public class Product
     public String price;
     public int year;
  
-        public Product (int productID, String name, String price, int year)
+        public Product (int productID, String name, String price, int year) throws idTooShortException, yearTooOldException, emptyFieldException
         {
-            this.productID = productID;
+            if(Integer.toString(productID).length() != 6)
+            {
+                throw new idTooShortException(" ID needs to be 6 numbers long");
+            }
+            else
+            {
+                this.productID = productID;
+            }
+            if(name == null)
+            {
+                throw new emptyFieldException("title field is empty, please enter all fields");
+            }
+            else
+            {
             this.name = name;
+            }
+            
+            if(price == null)
+            {
+                throw new emptyFieldException("price field is empty, please enter all fields");
+            }
+            else
+            {
             this.price = price;
-            this.year = year;
+            }
+            
+            if(year < 1000 || year > 9999)
+            {
+                throw new yearTooOldException("Year is not between 1000-9999");
+            }
+            else
+            {
+                this.year = year;
+            }
         }
         
         public int sendProdID()

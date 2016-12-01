@@ -15,11 +15,26 @@ public class book extends Product
 	private String author;
 	private String publisher;
 
-	public book (int productID, String name, String price, int year, String author, String publisher)
+	public book (int productID, String name, String price, int year, String author, String publisher) throws idTooShortException, yearTooOldException, emptyFieldException
 	{
                 super(productID,name,price,year);
+                if(author == null)
+                {
+                    throw new emptyFieldException("author field is empty, please fill in all fields");
+                }
+                else
+                {
 		this.author = author;
+                }
+                
+                if(publisher == null)
+                {
+                    throw new emptyFieldException("publisher field is empty, please fill in all fields");
+                }
+                else
+                {
 		this.publisher = publisher;
+                }
         }
                 
 	public String sendAuthor()
