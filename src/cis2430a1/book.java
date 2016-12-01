@@ -15,7 +15,7 @@ public class book extends Product
 	private String author;
 	private String publisher;
 
-	public book (int productID, String name, String price, int year, String author, String publisher) throws idTooShortException, yearTooOldException, emptyFieldException
+	public book (int productID, String name, String price, int year, String author, String publisher) throws idTooShortException, yearTooOldException, emptyFieldException, idDuplicateException
 	{
                 super(productID,name,price,year);
                 if(author == null)
@@ -62,7 +62,7 @@ public class book extends Product
         public String sendSearchData()
         {
             String searchData;
-            searchData = ("product ID: " + productID + "\nName: " + name + "\nPrice : $" + price + "\nYear: " + year + "\nAuthor(s): " + author + "\nPublisher: " + publisher + "\n");
+            searchData = ("product ID: " + productID + " Name: " + name + " Price : $" + price + " Year: " + year + " Author(s): " + author + " Publisher: " + publisher);
             
             return searchData;
         }

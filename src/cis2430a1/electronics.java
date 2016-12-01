@@ -14,7 +14,7 @@ public class electronics extends Product
     
 	private String maker;
 
-	public electronics (int productID, String name, String price, int year, String maker) throws idTooShortException, yearTooOldException, emptyFieldException
+	public electronics (int productID, String name, String price, int year, String maker) throws idTooShortException, yearTooOldException, emptyFieldException, idDuplicateException
 	{
                 super(productID,name,price,year);
                 if(maker == null)
@@ -42,7 +42,7 @@ public class electronics extends Product
         public String sendSearchData()
         {
             String searchData;
-            searchData = ("product ID: " + productID + "\nname: " + name + "\nprice: $" + price + "\nyear: " + year + "\nmaker: " + maker + "\n");
+            searchData = ("product ID: " + productID + " name: " + name + " price: $" + price + " year: " + year + " maker: " + maker);
             
             return searchData;
         }

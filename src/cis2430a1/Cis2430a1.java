@@ -62,6 +62,7 @@ public class Cis2430a1 extends JFrame
         super();
          ArrayList<Product> products = new ArrayList<Product>();
         HashMap <String, Product> map = new HashMap<>();
+        int itemCount = 0;
         setTitle("eStore");
         setSize(750,1000);
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -242,42 +243,45 @@ public class Cis2430a1 extends JFrame
            public void actionPerformed(ActionEvent e)
            {
              if(productType.getSelectedItem().toString().equals("book"))
-                {
-                    
-//                    String productID = aProdIDField.getText();
-//                    int productIDFinal = Integer.parseInt(productID);
-//                    String name = aNameField.getText();
-//                    String price = aPriceField.getText();
-//                    String year = aYearField.getText();
-//                    int yearFinal = Integer.parseInt(year);
-//                    String publisher = aPublisherField.getText();
-//                    String author = aAuthorField.getText();
-                    
+                {   
                     try
                     {
-                    String productID = aProdIDField.getText();
-                    int productIDFinal = Integer.parseInt(productID);
-                    String name = aNameField.getText();
-                    String price = aPriceField.getText();
-                    String year = aYearField.getText();
-                    int yearFinal = Integer.parseInt(year);
-                    String publisher = aPublisherField.getText();
-                    String author = aAuthorField.getText();
-                    
-                    Product tempBook = new book(productIDFinal, name, price, yearFinal, author, publisher);
-                    products.add(tempBook);
-                    map.put(name, tempBook);
-                    
-                    addTextMessage.append( name + " has successfully been added\n");
-                    aProdIDField.setText("");
-                    aNameField.setText("");
-                    aPriceField.setText("");
-                    aYearField.setText("");
-                    aAuthorField.setText("");
-                    aPublisherField.setText("");
-                    aMakerField.setText("");
+                        if("".equals(aNameField.getText()) | "".equals(aProdIDField.getText()) | "".equals(aPriceField.getText()) | "".equals(aYearField.getText()) | "".equals(aPublisherField.getText()) | "".equals(aAuthorField.getText()))
+                        {
+                            throw new emptyFieldException("Missing information, please enter all text fields.");
+                        }
+                        else
+                        {
+                            String productID = aProdIDField.getText();
+                            int productIDFinal = Integer.parseInt(productID);
+                            String name = aNameField.getText();
+                            String price = aPriceField.getText();
+                            String year = aYearField.getText();
+                            int yearFinal = Integer.parseInt(year);
+                            String publisher = aPublisherField.getText();
+                            String author = aAuthorField.getText();
+                            
+                             String [] mapKey = new String[256];
+                            mapKey = name.split("[ ]+");
+
+                            Product tempBook = new book(productIDFinal, name, price, yearFinal, author, publisher);
+                            products.add(tempBook);
+                            for(int i = 0; i < mapKey.length; i++)
+                            {
+                              map.put(mapKey[i], tempBook);  
+                            }
+
+                            addTextMessage.append( name + " has successfully been added\n");
+                            aProdIDField.setText("");
+                            aNameField.setText("");
+                            aPriceField.setText("");
+                            aYearField.setText("");
+                            aAuthorField.setText("");
+                            aPublisherField.setText("");
+                            aMakerField.setText("");
+                        }
                     }
-                    catch(idTooShortException | yearTooOldException | emptyFieldException m)
+                    catch(idTooShortException | yearTooOldException | emptyFieldException | idDuplicateException m)
                     {
                         addTextMessage.append((m.getMessage()) + "\n");
                         
@@ -286,28 +290,41 @@ public class Cis2430a1 extends JFrame
                 }
                 else if(productType.getSelectedItem().toString().equals("electronic"))
                 {
-                    String productID = aProdIDField.getText();
-                    int productIDFinal = Integer.parseInt(productID);
-                    String name = aNameField.getText();
-                    String price = aPriceField.getText();
-                    String year = aYearField.getText();
-                    int yearFinal = Integer.parseInt(year);
-                    String maker = aMakerField.getText();
                     try
                     {
-                        Product tempElectronic = new electronics(productIDFinal, name, price, yearFinal, maker);
-                        products.add(tempElectronic);
-                        map.put(name, tempElectronic);
-                        addTextMessage.append( name + " has successfully been added\n");
-                        aProdIDField.setText("");
-                        aNameField.setText("");
-                        aPriceField.setText("");
-                        aYearField.setText("");
-                        aAuthorField.setText("");
-                        aPublisherField.setText("");
-                        aMakerField.setText("");
+                        if("".equals(aNameField.getText()) | "".equals(aProdIDField.getText()) | "".equals(aPriceField.getText()) | "".equals(aYearField.getText()) | "".equals(aMakerField.getText()))
+                        {
+                            throw new emptyFieldException("Missing information, please enter all text fields.");
+                        }
+                        else
+                        {
+                            String productID = aProdIDField.getText();
+                            int productIDFinal = Integer.parseInt(productID);
+                            String name = aNameField.getText();
+                            String price = aPriceField.getText();
+                            String year = aYearField.getText();
+                            int yearFinal = Integer.parseInt(year);
+                            String maker = aMakerField.getText();
+                            String [] mapKey = new String[256];
+                            mapKey = name.split("[ ]+");
+
+                            Product tempElectronic = new electronics(productIDFinal, name, price, yearFinal, maker);
+                            products.add(tempElectronic);
+                            for(int i = 0; i < mapKey.length; i++)
+                            {
+                              map.put(mapKey[i], tempElectronic);  
+                            }
+                            addTextMessage.append( name + " has successfully been added\n");
+                            aProdIDField.setText("");
+                            aNameField.setText("");
+                            aPriceField.setText("");
+                            aYearField.setText("");
+                            aAuthorField.setText("");
+                            aPublisherField.setText("");
+                            aMakerField.setText("");
+                        }
                     }
-                    catch(idTooShortException | yearTooOldException | emptyFieldException m)
+                    catch(idTooShortException | yearTooOldException | emptyFieldException | idDuplicateException m)
                     {
                         addTextMessage.append((m.getMessage()) + "\n");
                     }
@@ -468,6 +485,40 @@ public class Cis2430a1 extends JFrame
         s.weighty = 0.5;
         s.fill = GridBagConstraints.HORIZONTAL;
         searchPanel.add(sSearchButton, s);
+        sSearchButton.addActionListener(new ActionListener ()
+        {
+           public void actionPerformed(ActionEvent e)
+           {
+               
+               if(!"".equals(sKeywordField.getText()))
+               {
+               String [] searchKey = new String[256];
+               searchKey = sKeywordField.getText().split("[ ]+");
+               
+               for(int i = 0; i < searchKey.length; i++)
+               {
+                   if(map.containsKey(searchKey[i].toLowerCase()))
+                   {
+                       searchTextMessage.append(map.get(searchKey[i]).sendSearchData() + "\n");
+                   }
+               }
+               }
+               else if(!"".equals(sProdIDField.getText()))
+               {
+                    int tempSize = products.size();
+                    int tempID = Integer.parseInt(sProdIDField.getText());
+                    for(int i = 0; i < tempSize; i++)
+                    {
+                        if(tempID == products.get(i).sendProdID())
+                        {
+                            searchTextMessage.append(products.get(i).sendSearchData());
+                        }
+                    }
+               }
+               
+           }
+            
+        });
         
         sKeywordLabel = new JLabel("Name/Keywords :");
         s.gridx = 0;
@@ -522,7 +573,7 @@ public class Cis2430a1 extends JFrame
         searchScroll = new JScrollPane(searchTextMessage);
         searchScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         searchPanel.add(searchScroll,s);
-        searchPanel.add(searchTextMessage, s);
+//        searchPanel.add(searchTextMessage, s);
         
 
         add(commandList);

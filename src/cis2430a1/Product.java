@@ -16,7 +16,7 @@ public class Product
     public String price;
     public int year;
  
-        public Product (int productID, String name, String price, int year) throws idTooShortException, yearTooOldException, emptyFieldException
+        public Product (int productID, String name, String price, int year) throws idTooShortException, yearTooOldException, emptyFieldException, idDuplicateException
         {
             if(Integer.toString(productID).length() != 6)
             {
